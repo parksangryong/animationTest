@@ -50,21 +50,17 @@ const ReanimatedTest = () => {
 
   //애니메이션2
   const translateXPress = (type: "left" | "right") => {
-    if (type === "left") {
-      translateX.value = withSpring(translateX.value - 50, {
-        reduceMotion: ReduceMotion.Never,
-      });
-      radius.value = withSpring(radius.value - 10, {
-        reduceMotion: ReduceMotion.Never,
-      });
-    } else {
-      translateX.value = withSpring(translateX.value + 50, {
-        reduceMotion: ReduceMotion.Never,
-      });
-      radius.value = withSpring(radius.value + 10, {
-        reduceMotion: ReduceMotion.Never,
-      });
-    }
+    const direction = type === "left" ? -1 : 1;
+    const change = 260 * direction;
+
+    translateX.value = withSpring(translateX.value + change, {
+      duration: 3000,
+      reduceMotion: ReduceMotion.Never,
+    });
+    radius.value = withSpring(radius.value + 50 * direction, {
+      duration: 3000,
+      reduceMotion: ReduceMotion.Never,
+    });
   };
 
   //애니메이션3
