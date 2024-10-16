@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { View, ScrollView, Button, StyleSheet, Text } from "react-native";
 import {
   Gesture,
@@ -14,6 +14,8 @@ import Animated, {
   Easing,
   ReduceMotion,
   useAnimatedStyle,
+  withRepeat,
+  cancelAnimation,
 } from "react-native-reanimated";
 import TossButton from "../components/TossButton";
 
@@ -32,9 +34,8 @@ const ReanimatedTest = () => {
 
   const pressed = useSharedValue<boolean>(false);
 
-  const isVisible = useSharedValue(true);
   const opacity = useSharedValue(0);
-
+  const isLoop = useSharedValue(true);
   //애니메이션1
   const pregressPress = (type: "plus" | "minus") => {
     if (type === "plus") {
@@ -115,12 +116,30 @@ const ReanimatedTest = () => {
   });
 
   const toggleVisibility = () => {
-    opacity.value = withTiming(isVisible.value ? 0 : 1, {
-      duration: 1000,
-      reduceMotion: ReduceMotion.Never,
-    });
-    isVisible.value = !isVisible.value; // 상태 반전
+    isLoop.value = !isLoop.value;
+
+    if (isLoop.value) {
+      opacity.value = 0;
+
+      opacity.value = withRepeat(
+        withTiming(1, {
+          duration: 2000,
+          reduceMotion: ReduceMotion.Never,
+        }),
+        -1,
+        true
+      );
+    } else {
+      cancelAnimation(opacity);
+    }
   };
+
+  useEffect(() => {
+    toggleVisibility(); // 컴포넌트가 마운트될 때 애니메이션 실행
+    return () => {
+      cancelAnimation(opacity); // 컴포넌트가 언마운트될 때 애니메이션 정지
+    };
+  }, []);
 
   //애니메이션6 : 드래그 앤 드롭
   const translateX4 = useSharedValue(0);
@@ -236,9 +255,7 @@ const ReanimatedTest = () => {
       <View style={styles.fifthView}>
         <Text style={styles.text}>Toggle Box</Text>
         <Button title="Toggle Box" onPress={toggleVisibility} />
-        {isVisible.value && (
-          <Animated.View style={[styles.box, animatedStyle]} />
-        )}
+        <Animated.View style={[styles.box, animatedStyle]} />
       </View>
       {/* 애니메이션6 */}
       <View style={styles.sixthView}>
