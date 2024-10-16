@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text } from "react-native";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+
+import ReanimatedTest from "./src/screens/ReanimatedTest";
+import LottiTest from "./src/screens/LottiTest";
+import AnimatableTest from "./src/screens/AnimatableTest";
+import SpringTest from "./src/screens/SpringTest";
+
+const BottomTab = createBottomTabNavigator();
+
+const BottomNavigator = () => {
+  return (
+    <BottomTab.Navigator
+      screenOptions={{
+        tabBarIcon: () => null,
+        tabBarLabelStyle: {
+          bottom: 15,
+        },
+      }}
+    >
+      <BottomTab.Screen name="Reanimated" component={ReanimatedTest} />
+      <BottomTab.Screen name="Lotti" component={LottiTest} />
+      <BottomTab.Screen name="Animatable" component={AnimatableTest} />
+      <BottomTab.Screen name="Spring" component={SpringTest} />
+    </BottomTab.Navigator>
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <BottomNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
