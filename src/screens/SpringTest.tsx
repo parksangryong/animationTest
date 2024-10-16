@@ -10,14 +10,14 @@ import { View, ScrollView, StyleSheet, Text, Button } from "react-native";
 const AnimatedView = animated(View);
 
 const SpringTest = () => {
-  // useSpring 애니메이션 설정
+  // useSpring 애니메이션 설정 : 개별 요소에 애니메이션 적용시 사용
   const springProps = useSpring({
     delay: 1000,
     from: { opacity: 0, translateX: 0 },
     to: { opacity: 1, translateX: 100 },
   });
 
-  // useTrail 애니메이션 설정
+  // useTrail 애니메이션 설정 : 여러 요소에 동일한 애니메이션 적용시 사용
   const items = ["Item 1", "Item 2", "Item 3"];
   const trailProps = useTrail(items.length, {
     delay: 1500,
@@ -25,7 +25,7 @@ const SpringTest = () => {
     to: { opacity: 1, translateX: 200, mass: 10, friction: 10 },
   });
 
-  //useTransition 애니메이션 설정
+  //useTransition 애니메이션 설정 : 요소의 추가 제거와 관련된 애니메이션 적용시 사용
   const [show, setShow] = useState(true);
   const transitionProps = useTransition(show, {
     from: { opacity: 0, translateX: 50 },

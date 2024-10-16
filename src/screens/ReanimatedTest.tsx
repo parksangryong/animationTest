@@ -15,6 +15,11 @@ import Animated, {
 } from "react-native-reanimated";
 
 const ReanimatedTest = () => {
+  // reanimated 애니메이션 설정 : 복잡한 애니메이션 적용시 사용
+  // 애니메이션 종류 : spring, timing, decay, gesture, sequence, parallel, stagger, loop, delay, event
+  // 애니메이션 적용방법: useSharedValue, useAnimatedStyle, useAnimatedProps, useDerivedValue, useAnimatedGestureHandler, useAnimatedReaction, useAnimatedValue, useAnimatedValueMap, useAnimatedValueXY, useSharedValue, useSharedValueMap, useSharedValueXY
+  // 애니메이션 적용 컴포넌트: View, Text, Image, ScrollView, FlatList, SectionList, Animated.View, Animated.Text, Animated.Image, Animated.ScrollView, Animated.FlatList, Animated.SectionList
+
   const width = useSharedValue(100);
   const translateX = useSharedValue(0);
   const radius = useSharedValue(0);
@@ -23,9 +28,6 @@ const ReanimatedTest = () => {
   const translateX3 = useSharedValue(0);
 
   const pressed = useSharedValue<boolean>(false);
-
-  const offset = useSharedValue<number>(0);
-  const decayWidth = useSharedValue<number>(0);
 
   //애니메이션1
   const pregressPress = (type: "plus" | "minus") => {

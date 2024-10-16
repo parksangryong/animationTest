@@ -2,6 +2,10 @@ import { View, ScrollView, StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 const AnimatableTest = () => {
+  //Animatable 애니메이션 설정 : 간단한 애니메이션 적용시 사용
+  // 애니메이션 종류 : slideInLeft, bounce, jello, fadeIn, zoomIn
+  // 컴포넌트 종류: View, Text, Image
+
   return (
     <ScrollView>
       <View style={styles.container}>
