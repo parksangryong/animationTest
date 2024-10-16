@@ -36,6 +36,7 @@ const SpringTest = () => {
   return (
     <ScrollView>
       {/* useSpring 애니메이션 */}
+      <Text style={styles.text}>useSpring</Text>
       <AnimatedView
         style={[
           {
@@ -46,6 +47,7 @@ const SpringTest = () => {
         ]}
       />
       {/* useTrail 애니메이션 */}
+      <Text style={styles.text}>useTrail</Text>
       {items.map((item, index) => (
         <AnimatedView
           key={index}
@@ -61,6 +63,8 @@ const SpringTest = () => {
         </AnimatedView>
       ))}
       {/* useTransition 애니메이션 */}
+      <Text style={styles.text}>useTransition</Text>
+      <Button onPress={() => setShow(!show)} title="Toggle" />
       {transitionProps((style, item) =>
         item ? (
           <animated.View
@@ -74,7 +78,6 @@ const SpringTest = () => {
           />
         ) : null
       )}
-      <Button onPress={() => setShow(!show)} title="Toggle" />
     </ScrollView>
   );
 };
@@ -104,6 +107,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: "blue",
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 10,
   },
 });
 

@@ -15,6 +15,7 @@ import Animated, {
   ReduceMotion,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import TossButton from "../components/TossButton";
 
 const ReanimatedTest = () => {
   // reanimated 애니메이션 설정 : 복잡한 애니메이션 적용시 사용
@@ -146,6 +147,18 @@ const ReanimatedTest = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 30,
+          paddingHorizontal: 20,
+        }}
+      >
+        <TossButton onPress={() => {}} title="동의하고 자산 계속 보기" />
+      </View>
+
       {/* 크기 변화 */}
       <View style={styles.firstView}>
         <Text style={styles.text}> withSpring</Text>
