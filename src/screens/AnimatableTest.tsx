@@ -33,6 +33,16 @@ const AnimatableTest = () => {
           Hello
         </Animatable.Text>
       </View>
+      <View style={styles.container}>
+        <Animatable.Text
+          animation="zoomIn"
+          duration={1000}
+          delay={1000}
+          style={{ fontSize: 20, color: "green" }}
+        >
+          Hello
+        </Animatable.Text>
+      </View>
     </ScrollView>
   );
 };
