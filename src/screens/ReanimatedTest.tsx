@@ -156,7 +156,11 @@ const ReanimatedTest = () => {
           paddingHorizontal: 20,
         }}
       >
-        <TossButton onPress={() => {}} title="동의하고 자산 계속 보기" />
+        <TossButton
+          onPress={() => {}}
+          title="동의하고 자산 계속 보기"
+          disabled={true}
+        />
       </View>
 
       {/* 크기 변화 */}

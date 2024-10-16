@@ -7,15 +7,15 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-const TossButton = ({
-  onPress,
-  title,
-}: {
+interface TossButtonProps {
   onPress: () => void;
   title: string;
-}) => {
+  disabled?: boolean;
+}
+
+const TossButton = ({ onPress, title, disabled = false }: TossButtonProps) => {
   const scale = useSharedValue(1);
-  const backgroundColor = useSharedValue("#0064FF");
+  const backgroundColor = useSharedValue(disabled ? "#BBBBBB" : "#0064FF");
   const textColor = useSharedValue("#FFFFFF");
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -32,6 +32,7 @@ const TossButton = ({
   });
 
   const handlePressIn = () => {
+    if (disabled) return;
     scale.value = withTiming(0.97, {
       duration: 200,
       reduceMotion: ReduceMotion.Never,
@@ -47,6 +48,7 @@ const TossButton = ({
   };
 
   const handlePressOut = () => {
+    if (disabled) return;
     scale.value = withTiming(1, {
       duration: 200,
       reduceMotion: ReduceMotion.Never,
@@ -63,7 +65,7 @@ const TossButton = ({
 
   return (
     <TouchableWithoutFeedback
-      onPress={onPress} // 클릭 시 onPress 함수 호출
+      onPress={disabled ? undefined : onPress} // 클릭 시 onPress 함수 호출
       onPressIn={handlePressIn} // 눌릴 때 애니메이션
       onPressOut={handlePressOut} // 떼면 원래대로
     >
